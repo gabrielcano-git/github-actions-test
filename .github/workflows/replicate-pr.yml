@@ -13,15 +13,15 @@ jobs:
       - name: Fazer checkout do código
         uses: actions/checkout@v2
         
-      - name: Configurar Git
-        run: |
-          git config --global user.name "CRM Ads - GitHub Actions"
-          git config --global user.email "crmads@cgh.com.br"
+      # - name: Configurar Git
+      #   run: |
+      #     git config --global user.name "CRM Ads - GitHub Actions"
+      #     git config --global user.email "crmads@cgh.com.br"
           
-      - name: Buscar branch de origem
-        run: |
-          git fetch origin
-          git checkout ${{ github.head_ref }} # Checkout na branch que está sendo mergeada
+      # - name: Buscar branch de origem
+      #   run: |
+      #     git fetch origin
+      #     git checkout ${{ github.head_ref }} # Checkout na branch que está sendo mergeada
 
       - name: Criar pull request
         uses: peter-evans/create-pull-request@v4
