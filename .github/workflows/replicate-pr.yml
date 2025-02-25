@@ -23,10 +23,6 @@ jobs:
           git fetch origin
           git checkout ${{ github.head_ref }} # Checkout na branch que está sendo mergeada
 
-      # - name: Push the changes to the target branch
-      #   run: |
-      #     git push origin homol # Substitua pelo nome da branch de destino
-
       - name: Criar pull request
         uses: peter-evans/create-pull-request@v4
         with:
