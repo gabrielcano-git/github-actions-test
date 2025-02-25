@@ -1,0 +1,37 @@
+name: Fluxo de Pull Requests - CRM Ads
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - "release/crmads-v*"
+
+jobs:
+  replicate-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+        
+      - name: Set up Git configuration
+        run: |
+          git config --global user.name "CRM Ads - GitHub Actions"
+          git config --global user.email "crmads@cgh.com.br"
+          
+      - name: Fetch source branch
+        run: |
+          git fetch origin
+          git checkout ${{ github.head_ref }} # Checkout na branch que está sendo mergeada
+
+      # - name: Push the changes to the target branch
+      #   run: |
+      #     git push origin homol # Substitua pelo nome da branch de destino
+
+      - name: Create a pull request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: homol # Substitua pela branch de destino
+          head: ${{ github.head_ref }} # Substitua pela branch de origem
+          title: "Replicate PR: ${{ github.event.pull_request.title }}"
+          body: "This PR replicates the changes from ${{ github.event.pull_request.html_url }}."
