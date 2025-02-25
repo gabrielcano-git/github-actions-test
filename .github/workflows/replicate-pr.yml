@@ -10,15 +10,15 @@ jobs:
   replicate-pr:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the code
+      - name: Fazer checkout do código
         uses: actions/checkout@v2
         
-      - name: Set up Git configuration
+      - name: Configurar Git
         run: |
           git config --global user.name "CRM Ads - GitHub Actions"
           git config --global user.email "crmads@cgh.com.br"
           
-      - name: Fetch source branch
+      - name: Buscar branch de origem
         run: |
           git fetch origin
           git checkout ${{ github.head_ref }} # Checkout na branch que está sendo mergeada
@@ -27,7 +27,7 @@ jobs:
       #   run: |
       #     git push origin homol # Substitua pelo nome da branch de destino
 
-      - name: Create a pull request
+      - name: Criar pull request
         uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
